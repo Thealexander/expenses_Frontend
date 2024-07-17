@@ -623,3 +623,18 @@ ul.CTAs a {
   font-size: 0.8rem;
   color: grey;
 }
+.card-income {
+  border: 2px solid #8BC34A; /* Verde suavizado */
+  background-color: #F0FFF0; /* Fondo verde muy claro */
+}
+
+.card-expense {
+  border: 2px solid #FF9800; /* Naranja suavizado */
+  background-color: #FFF5E6; /* Fondo naranja muy claro */
+}
+
+.card-img-top {
+  width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+  object-fit: cover;
+}
