@@ -1,9 +1,8 @@
-import React, { Fragment } from "react";
-import "../../App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
-// import { logout } from "../../slices/securitySlice";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
+import { logout } from '../../slices/securitySlices';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const { user, loading } = useSelector((state) => state.security);
@@ -12,66 +11,35 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
-    alert.success("Salio de sesion exitosamente");
+    alert.success('Session logged out successfully');
   };
 
   return (
-    <Fragment>
-      <nav className="navbar row">
-        <div className="col-12 col-md-3">
-          <div className="navbar-brand">
-            <Link to="/">
-              <img src="/images/expensive_logo.png" />
+    <nav className="navbar row">
+      <div className="col-12 col-md-3">
+        <div className="navbar-brand">
+          <Link to="/">
+            <img src="/images/expensive_logo.png" alt="Logo" />
+          </Link>
+        </div>
+      </div>
+      <div className="col-12 col-md-6 text-center">
+        <h1>Expense Tracker</h1>
+      </div>
+      <div className="col-12 col-md-3 text-right">
+        {user ? (
+          <button className="btn btn-danger" onClick={logoutHandler}>
+            Logout
+          </button>
+        ) : (
+          !loading && (
+            <Link className="btn btn-primary" id="login_btn" to="/login">
+              Login
             </Link>
-          </div>
-        </div>
-
-        <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-          {user ? (
-            <div className="ml-4 dropdown d-inline">
-              <Link
-                to="#!"
-                className="btn dropdown-toggle text-white mr-4"
-                type="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <figure className="avatar avatar-nav">
-                  <img
-                    src={user && user.avatar}
-                    alt={user && user.nombre}
-                    className="rounded-circle"
-                  />
-                </figure>
-                <span>{user && user.nombre}</span>
-              </Link>
-
-              <div
-                className="dropdown-menu"
-                aria-labelledby="dropDownMenuButton"
-              >
-                {user && user.roles.includes("ADMIN") && (
-                  <Link className="dropdown-item" to="/dashboard">
-                    Dashboard
-                  </Link>
-                )}
-
-                <Link className="dropdown-item" to="/" onClick={logoutHandler}>
-                  Logout
-                </Link>
-              </div>
-            </div>
-          ) : (
-            !loading && (
-              <Link className="btn ml-4" id="login_btn" to="/login">
-                Login
-              </Link>
-            )
-          )}
-        </div>
-      </nav>
-    </Fragment>
+          )
+        )}
+      </div>
+    </nav>
   );
 };
 
