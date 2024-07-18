@@ -3,7 +3,7 @@ import { loadUser, login, register } from '../actions/userActions';
 
 const initialState = {
     loading: false,
-    errors: [],
+    errorx: [],
     isAuthenticated: false,
     user: null,
 
@@ -26,17 +26,17 @@ export const securitySlice = createSlice({
     extraReducers: {
         [login.pending]: (state) => {
             state.loading = true;
-            state.errors = [];
+            state.errorx = [];
         },
         [login.fulfilled]: (state, { payload }) => {
             state.loading = false;
             state.user = payload;
-            state.errors = [];
+            state.errorx = [];
             state.isAuthenticated = true;
         },
         [login.rejected]: (state, action) => {
             state.loading = false;
-            state.errors = action.payload;
+            state.errorx = action.payload;
             state.isAuthenticated = false;
             state.user = null;
         },
@@ -48,12 +48,12 @@ export const securitySlice = createSlice({
         [register.fulfilled]: (state, { payload }) => {
             state.loading = false;
             state.user = payload;
-            state.errors = [];
+            state.errorx = [];
             state.isAuthenticated = true;
         },
         [register.rejected]: (state, action) => {
             state.loading = false;
-            state.errors = action.payload;
+            state.errorx = action.payload;
             state.isAuthenticated = false;
             state.user = null;
         },
@@ -65,13 +65,13 @@ export const securitySlice = createSlice({
         [loadUser.fulfilled]: (state, { payload }) => {
             state.loading = false;
             state.user = payload;
-            state.errors = [];
+            state.errorx = [];
             state.isAuthenticated = true;
 
         },
         [loadUser.rejected]: (state, action) => {
             state.loading = false;
-            state.errors = action.payload;
+            state.errorx = action.payload;
             state.isAuthenticated = false;
             state.user = null;
         },

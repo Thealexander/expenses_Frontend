@@ -14,7 +14,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { errors, isAuthenticated, loading } = useSelector(
+  const { errorx, isAuthenticated, loading } = useSelector(
     (state) => state.security
   );
 
@@ -23,10 +23,10 @@ const Login = () => {
       navigate("/");
     }
 
-    if (errors) {
-      errors.map((error) => alert.error(error));
+    if (errorx) {
+      errorx.map((error) => alert.error(error));
     }
-  }, [dispatch, alert, isAuthenticated, errors, navigate]);
+  }, [dispatch, alert, isAuthenticated, errorx, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
