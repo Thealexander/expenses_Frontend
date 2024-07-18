@@ -18,14 +18,14 @@ const Expense = ({ expense }) => {
           alt={expense.description}
         />
         <h5 className="card-title">
-          <Link to={`/expense/${expense.id}`}>{expense.description}</Link>
+          <Link to={`/expenses/${expense.id}`}>{expense.description}</Link>
         </h5>
         <div className="mt-auto">
           <p className="card-text"><strong>Transaction Type:</strong> {isIncome ? "Income" : "Expense"}</p>
           <p className="card-text"><strong>Amount:</strong> $ {expense.amount}</p>
           <p className="card-text"><strong>Execution Date:</strong> {new Date(expense.execution_date).toLocaleDateString()}</p>
         </div>
-        <Link id="view_btn" className="btn btn-primary btn-block mt-auto" to={`/expense/${expense.id}`}>
+        <Link id="view_btn" className="btn btn-primary btn-block mt-auto" to={`/expenses/${expense.id}`}>
           Details
         </Link>
       </div>
