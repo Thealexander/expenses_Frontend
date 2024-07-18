@@ -11,8 +11,21 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const { expenses, loading, error } = useSelector((state) => state.expenses);
+  /*   const {
+      expenses,
+      count,
+      pageIndex,
+      loading,
+      error,
+      resultByPage,
+      search,
+      pagesize,
+  
+    } = useSelector((state) => state.ExpensePagination);
+   */
+  //
   const alert = useAlert();
-  console.log('error===> ', error);
+ // console.log('error===> ', error);
 
 
   useEffect(() => {

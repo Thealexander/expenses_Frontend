@@ -683,3 +683,17 @@ ul.CTAs a {
 .btn-block {
   width: 100%;
 }
+.expense-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.expense-form .form-label {
+  font-weight: bold;
+}
+
+.expense-form .btn {
+  min-width: 120px;
+}

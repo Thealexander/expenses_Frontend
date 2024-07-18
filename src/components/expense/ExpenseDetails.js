@@ -8,7 +8,7 @@ import Loader from '../layout/Loader';
 const ExpenseDetails = () => {
     const incomeImage = './images/income.png';
     const expenseImage = './images/expenses.png';
-    const imageSrc = isIncome ? incomeImage : expenseImage;
+    //const imageSrc = isIncome ? incomeImage : expenseImage;
 
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -26,8 +26,12 @@ const ExpenseDetails = () => {
         }
     };
 
+    const handleEdit = () => {
+        navigate(`/edit-expense/${id}`);
+    };
+
     const handleAddNew = () => {
-        navigate("/add-expense"); // Assuming you have a route for adding new expenses
+        navigate("/add-expense");
     };
 
     if (loading) return <Loader />;
@@ -41,11 +45,11 @@ const ExpenseDetails = () => {
         <div className="container mt-5">
             <div className={`card p-3 rounded mb-3 ${cardClass}`}>
                 <div className="d-flex flex-column">
-                    <img
+                    {/* <img
                         className="card-img-top mx-auto mb-3"
                         src={imageSrc}
                         alt={expense.description}
-                    />
+                    /> */}
                     <h5 className="card-title">
                         <p><strong>Description:</strong> {expense.description}</p>
                     </h5>
@@ -67,8 +71,9 @@ const ExpenseDetails = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-between mt-3">
-                <button className="btn btn-primary" onClick={handleAddNew}>Add New Expense</button>
-                <button className="btn btn-danger" onClick={handleDelete}>Void Expense</button>
+                <button className="btn btn-primary" onClick={handleEdit}>Edit Register</button>
+                <button className="btn btn-primary" onClick={handleAddNew}>Add New Register</button>
+                <button className="btn btn-danger" onClick={handleDelete}>Void Register</button>
             </div>
         </div>
     );
