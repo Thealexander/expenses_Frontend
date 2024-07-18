@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import './Expense.css'; // Asegúrate de importar el archivo CSS
 
 const Expense = ({ expense }) => {
   const incomeImage = './images/income.png';
@@ -26,7 +25,7 @@ const Expense = ({ expense }) => {
           <p className="card-text"><strong>Amount:</strong> $ {expense.amount}</p>
           <p className="card-text"><strong>Execution Date:</strong> {new Date(expense.execution_date).toLocaleDateString()}</p>
         </div>
-        <Link id="view_btn" className="btn btn-block mt-auto" to={`/expense/${expense.id}`}>
+        <Link id="view_btn" className="btn btn-primary btn-block mt-auto" to={`/expense/${expense.id}`}>
           Details
         </Link>
       </div>

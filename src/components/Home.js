@@ -5,14 +5,15 @@ import { getExpenses } from "../actions/expensesActions";
 //import Loader from './layout/Loader.js'
 import Expense from "./expense/Expense.js";
 import { useAlert } from "react-alert";
-import Expenses from "./expenses/Expenses.js";
+import Expenses from "./expenses/Expenses";
 
 const Home = () => {
   const dispatch = useDispatch();
 
   const { expenses, loading, error } = useSelector((state) => state.expenses);
   const alert = useAlert();
-  console.log('error===> ', error)
+  console.log('error===> ', error);
+
 
   useEffect(() => {
     if (error != null) {
@@ -22,11 +23,9 @@ const Home = () => {
     dispatch(getExpenses());
   }, [dispatch, alert, error])
 
-  // if (loading) { return (<Loader />); }
-
   return (
     < Fragment >
-      <MetaData title={'Helping you to control expenses and ingress'} />
+      <MetaData title={'Helping you to control your  expenses and ingresses'} />
       <section id='expenses' className="container mt-5">
         <div className="row">
           <Expenses col={1} expenses={expenses} loading={loading} />

@@ -149,12 +149,12 @@ footer {
 }
 
 /* Expense Details Page */
-#product_id {
+#expensive_id {
   color: grey;
   font-size: 0.8rem;
 }
 
-#product_price {
+#expensive_price {
   font-size: 2rem;
   font-weight: bold;
 }
@@ -637,4 +637,49 @@ ul.CTAs a {
   width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
   height: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
   object-fit: cover;
+}
+/* efectos para expenses*/
+.card.border-success {
+  border-color: #28a745 !important;
+}
+
+.card.border-warning {
+  border-color: #ffc107 !important;
+}
+
+.card.border-success .card-img-top {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-radius: 4px;
+}
+
+.card.border-warning .card-img-top {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-radius: 4px;
+}
+.card-income {
+  border-color: #28a745 !important;
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.card-expense {
+  border-color: #ffc107 !important;
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.card-img-top {
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.btn-block {
+  width: 100%;
 }

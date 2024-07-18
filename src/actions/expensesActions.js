@@ -20,9 +20,10 @@ export const getExpenseById = createAsyncThunk(
     "expenses/getExpenseById",
     async (id, { rejectWithValue }) => {
         try {
-            await delayedTimeout(1000);
-            const response = await axios.get(`/expenses/${id}`);
-            return response.data;
+            return await axios.get(`/expenses/${id}/`);
+            //await delayedTimeout(1000);
+            // const response = await axios.get(`/expenses/${id}/`);
+            // return response.data;
         } catch (err) {
             return rejectWithValue(`Error: ${err.message}`);
         }
