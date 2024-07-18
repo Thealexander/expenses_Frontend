@@ -19,11 +19,13 @@ const options = {
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
-            <ErrorBoundary>
+
+        <ErrorBoundary>
+            <AlertProvider template={AlertTemplate} {...options}>
                 <App />
-            </ErrorBoundary>
-        </Router>
+            </AlertProvider>
+        </ErrorBoundary>
+
     </Provider>,
     document.getElementById('root')
 );
