@@ -4,6 +4,7 @@ import Home from './components/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ExpenseDetails from "./components/expense/ExpenseDetails";
 import ExpenseForm from "./components/expense/ExpenseForm";
+import Login from './components/jwt/Login';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path='/expenses/:id/' element={<ExpenseDetails />} />
             <Route path="/add-expense" element={<ExpenseForm />} />
             <Route path="/edit-expense/:id" element={<ExpenseForm />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
         <Footer />

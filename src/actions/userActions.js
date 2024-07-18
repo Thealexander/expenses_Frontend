@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../utilities/axios";
 import { delayedTimeout } from "../utilities/delayedTimeOut";
 
+// Login action
 export const login = createAsyncThunk(
     "user/login",
     async (params, { rejectWithValue }) => {
@@ -13,79 +14,80 @@ export const login = createAsyncThunk(
             };
 
             const { data } = await axios.post(
-                `/api/v1/usuario/login`,
+                `/account/login-app/`,
                 params,
                 requestConfig
             );
 
-            localStorage.setItem("token", data.token);
+            localStorage.setItem("token", data.token.access);
             await delayedTimeout(1000);
 
             return data;
         } catch (err) {
-            return rejectWithValue(err.response.data.message);
+            return rejectWithValue(err.response.data);
         }
     }
 );
 
+// Register action
 export const register = createAsyncThunk(
     "user/register",
     async (params, { rejectWithValue }) => {
         try {
             const requestConfig = {
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "application/json",
                 },
             };
 
             const { data } = await axios.post(
-                `/api/v1/usuario/register`,
+                `/account/register/`,
                 params,
                 requestConfig
             );
 
-            localStorage.setItem("token", data.token);
-
+            localStorage.setItem("token", data.token.access);
             await delayedTimeout(1000);
 
             return data;
         } catch (err) {
-            return rejectWithValue(err.response.data.message);
+            return rejectWithValue(err.response.data);
         }
     }
 );
 
-export const update = createAsyncThunk(
-    "user/update",
-    async (params, { rejectWithValue }) => {
+// Logout action
+export const logout = createAsyncThunk(
+    "user/logout",
+    async (_, { rejectWithValue }) => {
         try {
             const requestConfig = {
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "application/json",
                 },
             };
 
-            const { data } = await axios.put(
-                `/api/v1/usuario/update`,
-                params,
+            await axios.post(
+                `/account/logout/`,
+                {},
                 requestConfig
             );
 
-            localStorage.setItem("token", data.token);
+            localStorage.removeItem("token");
             await delayedTimeout(1000);
-            return data;
+
+            return {};
         } catch (err) {
-            console.log('error', err);
-            return rejectWithValue(err.response.data.message);
+            return rejectWithValue(err.response.data);
         }
     }
 );
-
+// session of the user
 export const loadUser = createAsyncThunk(
     "user/getUser",
-    async ({ rejectWithValue }) => {
+    async (_, { rejectWithValue }) => {
         try {
-            const { data } = await axios.get(`/api/v1/usuario`);
+            const { data } = await axios.get(`/account/session/`);
             localStorage.setItem("token", data.token);
             await delayedTimeout(1000);
             return data;
@@ -94,80 +96,3 @@ export const loadUser = createAsyncThunk(
         }
     }
 );
-
-export const updatePassword = createAsyncThunk(
-    "user/updatePassword",
-    async (params, { rejectWithValue }) => {
-        try {
-            const requestConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
-
-            const { data } = await axios.post(
-                `/api/v1/usuario/updatepassword`,
-                params,
-                requestConfig
-            );
-
-            return data;
-        } catch (err) {
-            return rejectWithValue(err.response.data.message);
-        }
-    }
-);
-
-export const forgotSendPassword = createAsyncThunk(
-    "user/forgotPassword",
-    async (params, { rejectWithValue }) => {
-        try {
-            const requestConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
-
-            const { data } = await axios.post(
-                `/api/v1/usuario/forgotpassword`,
-                params,
-                requestConfig
-            );
-
-            return data;
-        } catch (err) {
-            return rejectWithValue(err.response.data.message);
-        }
-    }
-);
-
-export const resetPassword = createAsyncThunk(
-    "user/resetPassword",
-    async ({ email, password, confirmPassword, token }, { rejectWithValue }) => {
-        try {
-            const requestConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
-
-            const request = {
-                email,
-                password,
-                confirmPassword,
-                token,
-            };
-
-            const { data } = await axios.post(
-                `/api/v1/usuario/resetpassword`,
-                request,
-                requestConfig
-            );
-
-            return data;
-        } catch (err) {
-            return rejectWithValue(err.response.data.message);
-        }
-    }
-);
-

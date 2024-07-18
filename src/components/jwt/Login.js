@@ -1,43 +1,91 @@
-import React, { useState } from "react";
-import { logout } from "../../const/axios";
+import React, { Fragment, useState, useEffect } from "react";
+import MetaData from "../layout/MetaData";
+import { Link, useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/userActions";
+import Loader from "../layout/Loader";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  const alert = useAlert();
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await login(username, password);
-      localStorage.setItem("token", response.data.token);
-      alert("Login successful");
-    } catch (error) {
-      alert("Login failed");
+  const { errors, isAuthenticated, loading } = useSelector(
+    (state) => state.security
+  );
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
     }
+
+    if (errors) {
+      errors.map((error) => alert.error(error));
+    }
+  }, [dispatch, alert, isAuthenticated, errors, navigate]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(login({ email, password }));
   };
 
+  if (loading) {
+    return (<Loader />);
+  }
+
+
   return (
-    <form onSubmit={handleLogin}>
-      <div>
-        <label>Username</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+    <Fragment>
+      <MetaData title={"Login"} />
+      <div className="row wrapper">
+        <div className="col-10 col-lg-5">
+          <form className="shadow-lg" onSubmit={submitHandler}>
+            <h1 className="mb-3">Login</h1>
+            <div className="form-group">
+              <label htmlFor="email_field">Email</label>
+              <input
+                type="email"
+                id="email_field"
+                className="form-control"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password_field">Password</label>
+              <input
+                type="password"
+                id="password_field"
+                className="form-control"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <Link to="/password/forgot" className="float-right mb-4">
+              Did you forget your Password?
+            </Link>
+
+            <button
+              id="login_button"
+              type="submit"
+              className="btn btn-block py-3"
+            >
+              LOGIN
+            </button>
+
+            <Link to="/register" className="float-right mt-3">
+              New user?
+            </Link>
+          </form>
+        </div>
       </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    </Fragment>
   );
 };
 

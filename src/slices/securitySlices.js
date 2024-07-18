@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loadUser, login, register, update, updatePassword } from '../actions/userActions';
+import { loadUser, login, register } from '../actions/userActions';
 
 const initialState = {
     loading: false,
-    errores: [],
+    errors: [],
     isAuthenticated: false,
     user: null,
-    isUpdated: false,
-    direccionEnvio: null
+
 };
 
 export const securitySlice = createSlice({
@@ -27,17 +26,17 @@ export const securitySlice = createSlice({
     extraReducers: {
         [login.pending]: (state) => {
             state.loading = true;
-            state.errores = [];
+            state.errors = [];
         },
         [login.fulfilled]: (state, { payload }) => {
             state.loading = false;
             state.user = payload;
-            state.errores = [];
+            state.errors = [];
             state.isAuthenticated = true;
         },
         [login.rejected]: (state, action) => {
             state.loading = false;
-            state.errores = action.payload;
+            state.errors = action.payload;
             state.isAuthenticated = false;
             state.user = null;
         },
@@ -49,45 +48,12 @@ export const securitySlice = createSlice({
         [register.fulfilled]: (state, { payload }) => {
             state.loading = false;
             state.user = payload;
-            state.errores = [];
+            state.errors = [];
             state.isAuthenticated = true;
         },
         [register.rejected]: (state, action) => {
             state.loading = false;
-            state.errores = action.payload;
-            state.isAuthenticated = false;
-            state.user = null;
-        },
-
-        [update.pending]: (state) => {
-            state.loading = true;
-            state.errores = []
-        },
-        [update.fulfilled]: (state, { payload }) => {
-            state.loading = false;
-            state.user = payload;
-            state.errores = [];
-            state.isAuthenticated = true;
-            state.isUpdated = true;
-        },
-        [update.rejected]: (state, action) => {
-            state.loading = false;
-            state.errores = action.payload;
-            state.isAuthenticated = false;
-            state.user = null;
-        },
-
-        [updatePassword.pending]: (state) => {
-            state.loading = true;
-            state.errores = []
-        },
-        [updatePassword.fulfilled]: (state, { payload }) => {
-            state.loading = false;
-            state.isUpdated = true;
-        },
-        [updatePassword.rejected]: (state, action) => {
-            state.loading = false;
-            state.errores = action.payload;
+            state.errors = action.payload;
             state.isAuthenticated = false;
             state.user = null;
         },
@@ -99,13 +65,13 @@ export const securitySlice = createSlice({
         [loadUser.fulfilled]: (state, { payload }) => {
             state.loading = false;
             state.user = payload;
-            state.errores = [];
+            state.errors = [];
             state.isAuthenticated = true;
-            state.direccionEnvio = payload.direccionEnvio;
+
         },
         [loadUser.rejected]: (state, action) => {
             state.loading = false;
-            state.errores = action.payload;
+            state.errors = action.payload;
             state.isAuthenticated = false;
             state.user = null;
         },
