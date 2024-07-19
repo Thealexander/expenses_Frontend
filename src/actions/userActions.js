@@ -87,7 +87,7 @@ export const loadUser = createAsyncThunk(
     "user/getUser",
     async (_, { rejectWithValue }) => {
         try {
-            const { data } = await axios.get(`/account/session/`);
+            const { data } = await axios.get(`/account/user/profile/`);
             localStorage.setItem("token", data.token);
             await delayedTimeout(1000);
             return data;

@@ -28,8 +28,9 @@ function App() {
         {<Header />}
         <div className="container container-fluid">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={!isAuthenticated ? <Login onLogin={login} /> : <Navigate to="/home" />} /> */}
+            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path='/expenses/:id/' element={<ExpenseDetails />} />
             <Route path="/add-expense" element={<ExpenseForm />} />

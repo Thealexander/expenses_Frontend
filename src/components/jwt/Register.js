@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../actions/userActions";
 
-
 const Register = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({
@@ -26,7 +25,7 @@ const Register = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (isAuthenticated) {
-            navigate("/");
+            navigate("/home");
         }
 
         if (errorx) {
