@@ -1,6 +1,6 @@
 const prod = {
   url: {
-    API_URL: "https://myapp.herokuapp.com",
+    API_URL: "52.90.51.115:8000",
   },
 };
 
